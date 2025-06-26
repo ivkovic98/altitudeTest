@@ -55,7 +55,6 @@ interface ProductListCardProps {
 const ProductListCard: React.FC<ProductListCardProps> = ({
     title,
     className,
-    maxProducts = 5,
     showActions = true,
     onProductCountChange,
     refreshTrigger = false,

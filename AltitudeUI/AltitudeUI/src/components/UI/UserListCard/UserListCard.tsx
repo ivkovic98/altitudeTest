@@ -16,9 +16,6 @@ import {
     UserEmail,
     UserDate,
     UserCheckbox,
-    UserActions,
-    BulkDeleteButton,
-    CancelSelectionButton,
     ButtonGroup
 } from './UserListCard.styled';
 
@@ -79,7 +76,6 @@ const UserListCard: React.FC<UserListCardProps> = ({
     title,
     className,
     maxUsers,
-    showActions = true,
     onUserCountChange,
     triggerDelete = false,
     onDeleteTriggered,
@@ -92,8 +88,6 @@ const UserListCard: React.FC<UserListCardProps> = ({
     const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
     const [isDeleting, setIsDeleting] = useState(false);
     const [showCheckboxes, setShowCheckboxes] = useState(false);
-
-    const userRole = localStorage.getItem('role');
 
     const loadUsers = async () => {
         try {

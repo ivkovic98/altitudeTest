@@ -6,14 +6,7 @@ import {
 import PageWrapper from '../../components/UI/PageWrapper';
 import ProductForm from '../../components/ProductForm';
 import { addProduct } from '../../services/api/product';
-import { Product } from '../../models/productModel';
-import { Modal, Button } from '../../components/UI';
-import {
-  ConfirmDialog,
-  ConfirmTitle,
-  ConfirmMessage,
-  ConfirmButtonGroup
-} from './ActiveProductPage.styled';
+import { Modal } from '../../components/UI';
 import {
   ContentContainer,
   MainContent,

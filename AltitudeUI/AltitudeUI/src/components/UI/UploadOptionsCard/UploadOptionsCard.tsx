@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Card from '../Card';
 import ActionButton from '../ActionButton';
 import {
     UploadCardContainer,

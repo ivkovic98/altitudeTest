@@ -81,8 +81,8 @@ If you prefer to run the application using Docker:
 
 4. **Access the application**
    - Frontend: `http://localhost:3000`
-   - Backend API: `http://localhost:8000`
-   - Database: `localhost:5432`
+   - Backend API: `http://localhost:5159`
+   - Database: `localhost:1433` (SQL Server)
 
 ### Docker Commands
 
@@ -112,11 +112,11 @@ If you prefer to run the application using Docker:
   ```
 
 ### Docker Architecture
-
+        
 The Docker setup includes:
-- **Frontend**: React app served by Nginx
-- **Backend**: Node.js API server
-- **Database**: PostgreSQL database
+- **Frontend**: React app built with Vite and served by Nginx
+- **Backend**: .NET 8 API server with Entity Framework Core
+- **Database**: SQL Server 2022 Express
 - **Network**: Custom bridge network for service communication
 
 ## 📋 Available Scripts

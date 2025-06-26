@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Product } from '../../models/productModel';
 import LabeledInput from '../UI/LabeledInput';
 import LabeledSelect from '../UI/LabeledSelect';
-import { ActionButton, Button } from '../UI';
+import { ActionButton } from '../UI';
 import * as Yup from 'yup';
 import {
     FormContainer,

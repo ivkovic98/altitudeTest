@@ -1,53 +1,51 @@
 version: '3.8'
 
 services:
-  # Frontend React Application
-  frontend:
-    build: .
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
+  # SQL Server Database
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: altitude-database
     environment:
-      - NODE_ENV=production
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_password123
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
     networks:
       - altitude-network
 
-  # Backend API (assumes backend repo is cloned alongside)
+  # .NET Backend API
   backend:
-    build: ../altitudeTestAPI
-    ports:
-      - "8000:8000"  # Adjust port based on your backend configuration
-    environment:
-      - NODE_ENV=production
-      # Add other backend environment variables as needed
-      - DB_HOST=database
-      - DB_PORT=5432
-      - DB_NAME=altitude_db
-      - DB_USER=altitude_user
-      - DB_PASSWORD=altitude_password
+    build: 
+      context: ../../../altitudeTestAPI/AltitudeApi
+      dockerfile: Dockerfile
+    container_name: altitude-backend
     depends_on:
       - database
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=database,1433;Database=AltitudeDB;User Id=sa;Password=Your_password123;TrustServerCertificate=true;
+    ports:
+      - "5159:8080"
     networks:
       - altitude-network
 
-  # Database (PostgreSQL - adjust if using different DB)
-  database:
-    image: postgres:15-alpine
+  # React Frontend
+  frontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: altitude-frontend
+    depends_on:
+      - backend
     ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_DB=altitude_db
-      - POSTGRES_USER=altitude_user
-      - POSTGRES_PASSWORD=altitude_password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Optional: for initial DB setup
+      - "3000:80"
     networks:
       - altitude-network
 
 volumes:
-  postgres_data:
+  sqlserver_data:
 
 networks:
   altitude-network:

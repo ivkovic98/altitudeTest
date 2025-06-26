@@ -25,13 +25,11 @@ const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     showEditButton = true,
 }) => {
     const [currentImage, setCurrentImage] = useState<string>(profileImage || '');
-    const [originalImage, setOriginalImage] = useState<string>(profileImage || '');
     const [showUploadOptions, setShowUploadOptions] = useState<boolean>(false);
     const [isUploading, setIsUploading] = useState<boolean>(false);
 
     useEffect(() => {
         setCurrentImage(profileImage || '');
-        setOriginalImage(profileImage || '');
     }, [profileImage]);
 
     const handleEditButtonClick = () => {
@@ -54,7 +52,6 @@ const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
             if (!decoded || !decoded.userId) throw new Error('Invalid token');
             const imageUrl = await uploadProfileImage(decoded.userId, file);
             setCurrentImage(imageUrl);
-            setOriginalImage(imageUrl);
         } catch (error) {
             alert('Failed to upload image: ' + error);
         } finally {

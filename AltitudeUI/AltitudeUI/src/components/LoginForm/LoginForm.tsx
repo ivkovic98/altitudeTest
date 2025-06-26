@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginAPI } from '../../services/api/auth';
-import { jwtDecode } from 'jwt-decode';
 import * as Yup from 'yup';
 import {
   PageWrapper,
-  DecorativeVector,
-  DecorativeVector2,
   FormGroupContainer,
   HelloText,
   SignInText,

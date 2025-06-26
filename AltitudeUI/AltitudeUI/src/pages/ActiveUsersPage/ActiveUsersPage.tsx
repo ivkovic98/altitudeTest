@@ -20,7 +20,6 @@ const ActiveUsersPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [triggerDelete, setTriggerDelete] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
-  const userRole = localStorage.getItem('role');
 
   const handleAddUser = () => {
     setShowAddModal(true);
