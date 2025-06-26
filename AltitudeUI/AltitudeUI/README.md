@@ -1,54 +1,176 @@
-# React + TypeScript + Vite
+# Altitude UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application built with TypeScript, Vite, and styled-components. This project features a responsive user interface with authentication, product management, analytics dashboard, and user management capabilities.
 
-Currently, two official plugins are available:
+## 🚀 Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow these steps to get the application running locally:
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Make sure you have the following installed on your system:
+- **Node.js** (version 16 or higher)
+- **npm** (comes with Node.js)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Backend Setup
+
+This application requires a backend API to function properly:
+
+1. **Clone and setup the backend**
+   ```bash
+   git clone https://github.com/ivkovic98/altitudeTestAPI.git
+   ```
+   
+2. **Follow the backend setup instructions** in the [altitudeTestAPI repository](https://github.com/ivkovic98/altitudeTestAPI)
+
+### Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ivkovic98/altitudeTest.git
+   cd altitudeTest/AltitudeUI
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   - Navigate to `http://localhost:5173` (or the URL shown in your terminal)
+   - The application should now be running!
+
+### Login Credentials
+
+Use these admin credentials to access the application:
+- **Email:** `admin@test.com`
+- **Password:** `admin123`
+
+*Note: These credentials are set up through the backend seeder.*
+
+## 🐳 Docker Setup (Alternative)
+
+If you prefer to run the application using Docker:
+
+### Prerequisites for Docker
+- **Docker** (version 20.10 or higher)
+- **Docker Compose** (version 2.0 or higher)
+
+### Docker Setup Steps
+
+1. **Clone both repositories**
+   ```bash
+   git clone https://github.com/ivkovic98/altitudeTest.git
+   git clone https://github.com/ivkovic98/altitudeTestAPI.git
+   ```
+
+2. **Navigate to the frontend directory**
+   ```bash
+   cd altitudeTest/AltitudeUI
+   ```
+
+3. **Run with Docker Compose**
+   ```bash
+   docker-compose up --build
+   ```
+
+4. **Access the application**
+   - Frontend: `http://localhost:3000`
+   - Backend API: `http://localhost:8000`
+   - Database: `localhost:5432`
+
+### Docker Commands
+
+- **Build and start all services:**
+  ```bash
+  docker-compose up --build
+  ```
+
+- **Run in background:**
+  ```bash
+  docker-compose up -d
+  ```
+
+- **Stop all services:**
+  ```bash
+  docker-compose down
+  ```
+
+- **View logs:**
+  ```bash
+  docker-compose logs -f
+  ```
+
+- **Rebuild specific service:**
+  ```bash
+  docker-compose build frontend
+  ```
+
+### Docker Architecture
+
+The Docker setup includes:
+- **Frontend**: React app served by Nginx
+- **Backend**: Node.js API server
+- **Database**: PostgreSQL database
+- **Network**: Custom bridge network for service communication
+
+## 📋 Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run preview` - Preview the production build locally
+- `npm run lint` - Run ESLint to check code quality
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework:** React 19
+- **Language:** TypeScript
+- **Build Tool:** Vite
+- **Styling:** Styled Components + Tailwind CSS
+- **HTTP Client:** Axios
+- **State Management:** TanStack Query (React Query)
+- **Routing:** React Router DOM
+- **Charts:** Chart.js with React Chart.js 2
+- **Authentication:** JWT
+- **Form Validation:** Yup
+- **Notifications:** React Hot Toast
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+├── pages/              # Page components
+├── services/           # API services and network configuration
+├── models/             # TypeScript type definitions
+├── routes/             # Routing configuration
+├── utils/              # Utility functions
+├── styles/             # Global styles and theme
+└── assets/             # Static assets (images, icons)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌟 Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Authentication System** - Login/logout functionality
+- **Product Management** - CRUD operations for products
+- **User Management** - Admin user management capabilities
+- **Analytics Dashboard** - Data visualization and insights
+- **Responsive Design** - Works on desktop and mobile devices
+- **Profile Management** - User profile and settings
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 📱 Application Pages
+
+- **Login** - User authentication
+- **Dashboard** - Main overview (Admin/Customer views)
+- **Active Products** - Product catalog and management
+- **Active Users** - User management (Admin only)
+- **Analytics** - Charts and statistics
+- **Profile** - User profile settings
+
+---
+

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import LabeledInput from '../UI/LabeledInput';
-import LabeledSelect from '../UI/LabeledSelect';
 import { ActionButton } from '../UI';
 import * as Yup from 'yup';
 import {

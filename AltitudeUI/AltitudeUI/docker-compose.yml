@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Frontend React Application
+  frontend:
+    build: .
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+    networks:
+      - altitude-network
+
+  # Backend API (assumes backend repo is cloned alongside)
+  backend:
+    build: ../altitudeTestAPI
+    ports:
+      - "8000:8000"  # Adjust port based on your backend configuration
+    environment:
+      - NODE_ENV=production
+      # Add other backend environment variables as needed
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_NAME=altitude_db
+      - DB_USER=altitude_user
+      - DB_PASSWORD=altitude_password
+    depends_on:
+      - database
+    networks:
+      - altitude-network
+
+  # Database (PostgreSQL - adjust if using different DB)
+  database:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=altitude_db
+      - POSTGRES_USER=altitude_user
+      - POSTGRES_PASSWORD=altitude_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Optional: for initial DB setup
+    networks:
+      - altitude-network
+
+volumes:
+  postgres_data:
+
+networks:
+  altitude-network:
+    driver: bridge 

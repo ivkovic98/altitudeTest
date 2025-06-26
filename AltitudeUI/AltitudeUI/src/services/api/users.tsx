@@ -37,46 +37,14 @@ export const addUser = async (userData: {
     Number: string;
     UserRole: number;
 }): Promise<User> => {
-    // Kreiraj FormData
-    const formData = new FormData();
-    formData.append('FirstName', userData.FirstName);
-    formData.append('LastName', userData.LastName);
-    formData.append('Username', userData.Username);
-    formData.append('Email', userData.Email);
-    formData.append('Password', userData.Password);
-    formData.append('Number', userData.Number);
-    formData.append('UserRole', userData.UserRole.toString());
+    console.log('User data za addUser:', userData);
+    const response = await axiosInstance.post(`/${USER_URL}`, userData);
 
-
-    const response = await axiosInstance.post(`/${USER_URL}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    });
-
-    // Debug: loguj šta vraća backend
-    console.log('Backend response za addUser:', response.data);
-
-    // Mapiranje iz PascalCase u camelCase
-    const responseUser = response.data;
-    const mappedUser = {
-        id: responseUser.Id || responseUser.id,
-        firstName: responseUser.FirstName || responseUser.firstName,
-        lastName: responseUser.LastName || responseUser.lastName,
-        email: responseUser.Email || responseUser.email,
-        username: responseUser.Username || responseUser.username,
-        number: responseUser.Number || responseUser.number,
-        userRole: responseUser.UserRole || responseUser.userRole,
-        profileImageUrl: responseUser.ProfileImageUrl || responseUser.profileImageUrl,
-        createdAt: responseUser.CreatedAt || responseUser.createdAt,
-        isDeleted: responseUser.IsDeleted || responseUser.isDeleted
-    };
-
-    console.log('Mapped user:', mappedUser);
-    return mappedUser;
+    return response.data;
 };
 
 export const updateUser = async (id: string, userData: any): Promise<void> => {
+    console.log('Updating user:', userData);
     await axiosInstance.put(`/${USER_URL}/${id}`, userData);
 };
 
@@ -106,26 +74,7 @@ export const uploadProfileImage = async (userId: string, imageFile: File): Promi
 export const getCurrentUserProfile = async (): Promise<User> => {
     const response = await axiosInstance.get(`/${USER_URL}/profile`);
 
-    // Debug: loguj šta vraća backend
-    console.log('Backend response za getCurrentUserProfile:', response.data);
-
-    // Mapiranje iz PascalCase u camelCase
-    const responseUser = response.data;
-    const mappedUser = {
-        id: responseUser.Id || responseUser.id,
-        firstName: responseUser.FirstName || responseUser.firstName,
-        lastName: responseUser.LastName || responseUser.lastName,
-        email: responseUser.Email || responseUser.email,
-        username: responseUser.Username || responseUser.username,
-        number: responseUser.Number || responseUser.number,
-        userRole: responseUser.UserRole || responseUser.userRole,
-        profileImageUrl: responseUser.ProfileImageUrl || responseUser.profileImageUrl,
-        createdAt: responseUser.CreatedAt || responseUser.createdAt,
-        isDeleted: responseUser.IsDeleted || responseUser.isDeleted
-    };
-
-    console.log('Mapped current user:', mappedUser);
-    return mappedUser;
+    return response.data;
 };
 
 

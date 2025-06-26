@@ -168,7 +168,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit, onUpda
         Email: formData.email,
         Username: formData.username,
         Number: formData.contactNumber,
-        UserRole: role, 
+
       };
 
 
